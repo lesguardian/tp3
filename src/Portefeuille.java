@@ -10,18 +10,22 @@ public class Portefeuille {
   }
 
   /**
-   * Cette fonction vous permet de transférer des devises du portefeuille actuel 
-   * vers le portefeuille de destination pour le montant indiqué. Le type de devise 
-   * (nom du Jeton) doit être le même entre les deux portefeuilles et le montant 
-   * du portefeuille actuel doit être supérieur ou égal à  celui indiqué.
+   * Cette fonction vous permet de transfÃ©rer des devises du portefeuille actuel 
+   * vers le portefeuille de destination pour le montant indiquÃ©. Le type de devise 
+   * (nom du Jeton) doit Ãªtre le mÃªme entre les deux portefeuilles et le montant 
+   * du portefeuille actuel doit Ãªtre supÃ©rieur ou Ã©gal Ã  celui indiquÃ©.
    * @param destination 
    * @param montantJetons
    * @return Vrai si la transaction a Ã©tÃ© effectuÃ©e, faux sinon.  
    */
   public boolean transfertDevise (Portefeuille destination, double montantJetons){
-      /**
-           FONCTION À IMPLEMENTER
-	  **/
+
+      if(this.monnaie.getNom() == destination.monnaie.getNom() && montant >= montantJetons)
+      {
+          destination.montant+= montantJetons;
+          this.montant-= montantJetons;
+          return true;
+      }
       return false;
   }
 
@@ -33,11 +37,11 @@ public class Portefeuille {
    * @return true si le montant en euros est supÃ©rieur ou Ã©gal Ã  0 
    */
   public boolean achatDevise (double montantEuros){
-	
-	if ( montantEuros >= 0 )
-	{ 
-	    return true ;
-	}
+
+    if(montantEuros>=0){
+        this.montant+=montantEuros/this.monnaie.getValeurDeJeton();
+        return true;
+    }
     return false;
   }
 
